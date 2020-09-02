@@ -11,6 +11,7 @@ type AppVersion struct {
 	gorm.Model
 	AppName string `gorm:"type:varchar(100);unique_index"`
 	AppVersion string `gorm:"type:varchar(100)"`
+	url string
 }
 var db *gorm.DB
 var err error
