@@ -11,7 +11,7 @@ type AppVersion struct {
 	gorm.Model
 	AppName string `gorm:"type:varchar(100);unique_index"`
 	AppVersion string `gorm:"type:varchar(100)"`
-	url string
+	DownUrl string `gorm:"type:varchar(1000)"`
 }
 var db *gorm.DB
 var err error
@@ -39,12 +39,11 @@ func main() {
 
 //增加一个版本
 func addAppV(c *gin.Context) {
-	appV := AppVersion{AppName: c.Request.FormValue("AppName"),AppVersion: c.Request.FormValue("AppVersion")}
+	appV := AppVersion{AppName: c.Request.FormValue("AppName"),AppVersion: c.Request.FormValue("AppVersion"),DownUrl: c.Request.FormValue("DownUrl")}
 	result := db.Create(&appV)
 	c.JSON(http.StatusOK,gin.H{
 		"msg": result,
 	})
-
 }
 
 //删除一个版本
